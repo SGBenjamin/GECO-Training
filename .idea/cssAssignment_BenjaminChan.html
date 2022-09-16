@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .text_center{
+            text-align: center;
+        }
+        .text_left{
+            text-align: left;
+        }
+        .text_right{
+            text-align: right;
+        }
+        .img_float{
+            float: right;
+            height: 120px;
+            width: 180px;
+        }
+
+        #span-text{
+            color: red;
+            text-transform: uppercase;
+            font-family: "Lucida Console", "Courier New", monospace;
+        }
+        #display-example{
+            display: none;
+        }
+        #background-color{
+            background-color: teal;
+        }
+        #margin{
+            margin: 50px;
+            border: 2px solid red;
+        }
+        #bottom-margin{
+            margin-bottom:25px;
+            border: 2px solid red;
+        }
+        #top-margin{
+            margin-top:25px;
+            border: 2px solid red;
+        }
+        #left-margin{
+            margin-left:25px;
+            border: 2px solid red;
+        }
+        #right-margin{
+            margin-right:25px;
+            border: 2px solid red;
+        }
+        #padding{
+            padding: 50px;
+            border: 2px solid blue;
+        }
+        #bottom-padding{
+            padding-bottom:25px;
+            border: 2px solid blue;
+        }
+        #top-padding{
+            padding-top:25px;
+            border: 2px solid blue;
+        }
+        #left-padding{
+            padding-left:25px;
+            border: 2px solid blue;
+        }
+        #right-padding{
+            padding-right:25px;
+            border: 2px solid blue;
+        }
+        #textDeco-overline{
+            text-decoration: overline;
+        }
+        #textDeco-underline{
+            text-decoration: underline;
+        }
+        #textDeco-lineThrough{
+            text-decoration: line-through;
+        }
+        #textDeco-combo{
+            text-decoration: overline underline blue 2px;
+        }
+
+        div{
+            border-width: 2;
+            border-color: black;
+            border-style: dashed;
+            padding: 25px;
+        }
+        div.position{
+            position: static;
+        }
+        div.relative{
+            position: relative;
+            left: 30px;
+            top: 30px;
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <p class="text_center">This is the text aligned (Center) Example</p>
+    <p class="text_left">This is the text aligned (left) Example</p>
+    <p class="text_right">This is the text aligned (right) Example</p>
+    <div>
+        <img class="img_float" src="https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__340.jpg" alt="Image of Flower"/>
+        <span id="span-text">Test block of text to demostrate image float tag.</span>
+
+        <br>
+        <div id="display-example">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor.
+            Maecenas nisl est, ultrices nec congue eget, auctor vitae massa.
+            Fusce luctus vestibulum augue ut aliquet.
+            Mauris ante ligula, facilisis sed ornare eu, lobortis in odio.
+        </div>
+
+        <div id="background-color">
+            Praesent convallis urna a lacus interdum ut hendrerit risus congue.
+            Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac.
+            In at libero sed nunc venenatis imperdiet sed ornare turpis.
+            Donec vitae dui eget tellus gravida venenatis. Integer fringilla congue eros non fermentum.
+            Sed dapibus pulvinar nibh tempor porta. Cras ac leo purus. Mauris quis diam velit.
+        </div>
+
+
+    </div>
+    <div>
+        <p>No Margin</p>
+        <p id="top-margin">Top Margin</p>
+        <p id="left-margin">Left Margin</p>
+        <p id="bottom-margin">Bottom Margin</p>
+        <p id="right-margin">Right Margin</p>
+        <p id="margin">All Margin</p>
+    </div>
+    <div>
+        <p>No padding</p>
+        <p id="top-padding">Top padding</p>
+        <p id="left-padding">Left padding</p>
+        <p id="bottom-padding">Bottom padding</p>
+        <p id="right-padding">Right padding</p>
+        <p id="padding">All padding</p>
+    </div>
+
+    <div>
+        <p>No Decoration</p>
+        <p id="textDeco-overline">Overline</p>
+        <p id="textDeco-underline">Underline</p>
+        <p id="textDeco-lineThrough">Strikethrough</p>
+        <p id="textDeco-combo">Blue Combo</p>
+    </div>
+    <div class="static">
+        Static Positioning
+    </div>
+    <div class="relative">
+        Relative Positioning
+    </div>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+      var array =[];
+      function ar_add(value){
+        array.push(value);
+        console.log(array);
+      }
+
+
+      function obj_method(){
+        let object = [
+          {
+              "make": "Honda",
+              "model": "Fit",
+              "year": 2002
+          },
+          {
+              "make": "Toyota",
+              "model": "Altis",
+              "year": 2015
+          },
+          {
+              "make": "KIA",
+              "model": "Stonic",
+              "year": 2022
+          },
+          {
+              "make": "Tesla",
+              "model": "Model X",
+              "year": 2021
+          }
+        ];
+        return object;
+
+      }
+
+
+    </script>
+</head>
+<body>
+<script>
+    ar_add("value1");
+    ar_add("value2");
+    ar_add("value3");
+    ar_add("value4");
+    ar_add("value5");
+
+    var obj = obj_method();
+    for(let i=0; i<obj.length; i++){
+        console.log(obj[i]);
+    }
+    for(let index in obj){
+        console.log("**************")
+       for(let item in obj[index]){
+        console.log(item+" "+obj[index][item])
+       }
+
+    }
+
+</script>
+
+</body>
+</html>

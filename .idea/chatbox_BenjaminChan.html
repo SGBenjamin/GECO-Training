@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+            #message_list{
+                height: 250px;
+                overflow-y: auto;
+            }
+            .parent_div{
+                border: 2px solid #000;
+                width: 50%;
+                margin: 0 auto;
+                overflow: hidden;
+            }
+            .input_message, .username{
+                border: 2px solid #b02727;
+                margin: 2%;
+            }
+            .input_message textarea{
+                height: 80px;
+                width: 99%;
+            }
+            .username textarea{
+                height:25px;
+                width:99%;
+            }
+
+            .send_btn{
+                float: right;
+                width: 20%;
+                padding: 1%;
+                background: violet;
+                color: #fff;
+                font-size: 20px;
+                margin: 1%;
+            }
+            .user_tag{
+                color: red;
+                font-weight: bold;
+                }
+        </style>
+        <script type="text/javascript">
+            var chatMessage = [];
+
+
+            function addMessage(){
+                let inputMsg = document.getElementById("inputMsg");
+                let message = inputMsg.value;
+                let username = document.getElementById("username").value;
+<!--                console.log(username + " " + message);-->
+                chatMessage.push({"user":username, "message":message});
+                console.log(chatMessage);
+                let html = '';
+                for(let index in chatMessage){
+                    console.log(chatMessage.user);
+                    html += '<div><span class="user_tag">'+chatMessage[index]["user"]+'</span>' + " : " + chatMessage[index]["message"] +'<div>';
+                }
+                document.getElementById("message_list").innerHTML = html;
+                inputMsg.value = '';
+           }
+
+        </script>
+</head>
+<body>
+
+    <div class="parent_div">
+        <div id="message_list"></div>
+        <div class="username" alig="center">
+            <textarea name="" id="username" placeholder="Enter username"></textarea>
+        </div>
+        <div class="input_message" align="center">
+            <textarea name="" id="inputMsg" placeholder="Enter message"></textarea>
+        </div>
+        <div>
+            <button class="send_btn" onclick="addMessage()">Send</button>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>HTML Test 1</title>
+    </head>
+    <body>
+        <header align="center">
+            <b>HTML Assignment for 7th September</b><br>
+            <b>Submitted by <span style="color: red">Benjamin Chan</span></b>
+        </header>
+
+        <section>
+            <h1 style="color: blue" align="center">Section 1</h1>
+            <h1>Testing1</h1>
+            <h2>Testing2</h2>
+            <h3>Testing3</h3>
+            <h4>Testing4</h4>
+            <h5>Testing5</h5>
+            <h6>Testing6</h6>
+        </section>
+
+        <section>
+            <h1 style="color: blue" align="center">Section 2</h1>
+            <b>
+                This is the bolded text Example
+            </b>
+            <br>
+            <u>
+                This is the Underlined Text Example
+            </u>
+            <br>
+            <i>
+                <!--this is italics-->
+                Hello, how are you??
+            </i>
+            <br>
+            <p>This is a quote:</p>
+            <br>
+            <blockquote>
+                This is a Quotation
+            </blockquote>
+            <br>
+        </section>
+
+        <section>
+            <h1 style="color: blue" align="center">Section 3</h1>
+            <strike>
+                This is a striked example
+            </strike>
+        </section>
+
+        <a href="http://www.google.com"  target="_blank">
+            click here to access google
+        </a>
+        <br>
+        <img src="https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__340.jpg" alt="Image of Flower"/>
+        <br>
+        <!--this is delibrately done to demostrate error in image source-->
+        <img src="https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__340.jpgdsaasd" alt="Image of Flower"/>
+        <br>
+        <ul>
+            <li>First</li>
+            <li>Second</li>
+            <li>third</li>
+        </ul>
+        <ol>
+            <li>First</li>
+            <li>Second</li>
+            <li>Third</li>
+        </ol>
+        <select name="test" id="test">
+            <option value="select">Please select Test Required</option>
+            <option value="select1">Selection 1</option>
+            <option value="select2">Selection 2</option>
+            <option value="select3">Selection 3</option>
+            <option value="select4">Selection 4</option>
+
+        </select>
+
+        <form>
+            <table>
+                <tr>
+                    <td >Input 1:</td>
+                    <td><input type="text" name="input1" required></td>
+                </tr>
+                <tr>
+                    <td>Input 2:</td>
+                    <td><input type="text" name="input2" required></td>
+                </tr>
+                <tr>
+                    <td>Input 3:</td>
+                    <td><input type="text" name="input3" required></td>
+                </tr>
+                <tr>
+                    <td>TestButton 1</td>
+                    <td><button type="button">Click me!</button></td>
+                </tr>
+
+            </table>
+            <br/>
+            <input type="file" name="file" required/><br/><br/>
+
+            <input type="submit" value="Submit new Webservice">
+            <br/><br/>
+
+        </form>
+
+        <div>
+            This is sample division<br>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/LDU_Txk06tM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <br>
+            <audio controls>
+                <!--                Putting this here as placeholder.-->
+                <source src="sample.wav" type="audio/wav">
+            </audio>
+            <video controls>
+                <!--                Putting this here as placeholder.-->
+                <source src="sample.mp4" type="video/mp4">
+            </video>
+        </div>
+        <br>
+        <footer>
+            <b style="color: red">HTML Assignment Submitted by: Benjamin Chan</b><br>
+            <a href="mailto:benjamin.chan@geco.asia">benjamin.chan@geco.asia</a>
+        </footer>
+
+    </body>
+</html>
