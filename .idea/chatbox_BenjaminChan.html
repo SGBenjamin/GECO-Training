@@ -55,7 +55,6 @@
                 console.log(chatMessage);
                 let html = '';
                 for(let index in chatMessage){
-                    console.log(chatMessage.user);
                     html += '<div><span class="user_tag">'+chatMessage[index]["user"]+'</span>' + " : " + chatMessage[index]["message"] +'<div>';
                 }
                 document.getElementById("message_list").innerHTML = html;
