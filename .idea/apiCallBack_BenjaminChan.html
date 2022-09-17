@@ -9,34 +9,63 @@
         .user_tag{
                 color: red;
                 font-weight: bold;
+                position: absolute;
+                left:50px;
+
+               
                 }
+        .email{
+                color: blue;
+                font-weight: bold;
+                position: absolute;
+                left: 200px;
+
+                }
+        img{
+            position: relative;
+            left: 450px;
+        }
+        .error{
+            background-color: red;
+            display: inline;
+            font-weight: bold;
+            text-decoration-color: black;
+            font-size: 24px;
+        }
+      
+
     </style>
     <script type="text/javascript">
         function extractInfo(){
             var employeeInfo =[]
             let html =""
-            
-               fetch(
-                "https://reqres.in/api/users?page=1",
+            for(let i=1; i<=50; i++){
+                 fetch(
+                "https://reqres.in/api/users?page=" +i,
                 {method: 'GET'}
                 ).then(res=>res.json())
                 .then(res2=>{
                     employeeInfo = res2.data
-                    for(let id in employeeInfo){
-                    let fname = employeeInfo[id].first_name
-                    let email = employeeInfo[id].email
-                    let avatar = employeeInfo[id].avatar
-                    html += '<div><span class="user_tag">'+fname+'</span>' + "  " + email +"    "+'<img src ='+ avatar+' height="80" width="60"/>'+'<div>';
-                    // console.log(html)
-                    // document.getElementById("response").innerHTML = "Page "+ i;
-                    document.getElementById("response").innerHTML = html;
-                    // }
+                    if(employeeInfo.length!=0){
+                       for(let id in employeeInfo){
+                        let fname = employeeInfo[id].first_name
+                        let email = employeeInfo[id].email
+                        let avatar = employeeInfo[id].avatar
+                        html += '<div><span class="user_tag">'+fname+'</span>' + "  " + '<span class=email>'+email +'</span>'+"    "+
+                        '<img src ='+ avatar+' height="80" width="60"/>'+'<div>';
+                        document.getElementById("response").innerHTML = html;     
+                        } 
+                    } else if(employeeInfo.length==0){
+                        document.getElementById("error").innerHTML = "No Data Found"
                     }
+                   
                 })
                 .catch(err=>{
                     console.log("No data found"),
                     document.getElementById("response").innerHTML = err;
                 })
+            }
+              
         }
         function inputInfo(){
             
@@ -75,13 +104,15 @@
     </script>
 </head>
 <body>
-    <div id="response"></div>
+    <div id="response" ></div>
     <div>
         <input type="text" id="name" name="name" placeholder="Enter Name"required>
         <input type="text" id="jobTitle" name="jobTitle" placeholder="Enter Job Title" required>
         <button onclick="inputInfo()">Click to input new Entry</button>
     </div> 
-    <div id="error"></div>
+    <br>
+    <div class="error" id="error"></div>
+    <br>
     <br>
     <div>
         <button onclick="extractInfo()">Click to list all Personnel</button>
