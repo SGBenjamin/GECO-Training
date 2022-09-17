@@ -3,17 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-  <script>
-    sadsad
-    asdsad
+  <script type="text/javascript">
+    let pageNo = document.getElementById("page_no").value
+    fetch(
+      "https://reqres.in/api/users?page="+pageNo,
+      {method:"GET"}
+    ).then(res=>res.json())
+    .then(res2=>{
+      document.getElementById("server_response").innerHTML = json.stringify(res2);
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+
   </script>
 </head>
 <body>
   <div>
-    sidalk
-    sadad
-    asdsa
-    asdsad
+
   </div>
 
 </body>
