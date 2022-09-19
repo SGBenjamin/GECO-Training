@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let d = new Date();
+        // console.log(d.getDay()+"/"+d.getMonth()+"/"+d.getFullYear())
+        setInterval(()=>{
+            let d = new Date();
+            let hours = d.getHours();
+            let min = d.getMinutes();
+            let sec = d.getSeconds();
+            let day = d.getDate();
+            let month = d.getMonth()+1;
+            let year = d.getFullYear();
+            let dayofWeek = d.getDay()
+            let ampm = "";
+
+            switch(dayofWeek){
+                case 1:
+                    dayofWeek = "Monday"
+                case 2:
+                    dayofWeek = "Tuesday"
+                case 3:
+                    dayofWeek = "Wednesday"
+                case 4:
+                    dayofWeek = "Thursday"
+                case 5:
+                    dayofWeek = "Friday"
+                case 6:
+                    dayofWeek = "Saturday"
+                case 0:
+                    dayofWeek = "Sunday"
+            }
+
+            if(hours<10){
+                hours = "0"+hours;
+            }
+            if(min<10){
+                min = "0"+min;
+            }
+            if(sec<10){
+                sec = "0"+sec;
+            }
+            if(day<10){
+                day = "0"+day;
+            }            
+            if(month<10){
+                month = "0"+month;
+            }
+            if(hours>=12){
+                ampm = "pm"
+            }else ampm = "am"
+
+            document.getElementById("date").innerHTML = "Today's date is: "+dayofWeek+"  "+day+"/"+month+"/"+year;
+            document.getElementById("time").innerHTML = "The time now is: "+hours+":"+min+":"+sec+" "+ampm;
+        },1000)
+
+        function dateDiff(){
+            let d = new Date();
+            let inputDate = document.getElementById("inputDate").value;
+            let dob = new Date(inputDate);
+            var yob = dob.getFullYear();
+            var diff = Math.abs(d.getFullYear() - yob)
+            if(inputDate!=""){
+                document.getElementById("diff").innerHTML = diff
+            var diffDisplay = document.getElementById('diffDisplay');
+            var displaySetting = diffDisplay.style.display;
+            if(displaySetting=='block'){
+                diffDisplay.style.display='none'
+            }else{
+                diffDisplay.style.display='block'
+            }
+            }else return;
+            
+        }
+    </script>
+</head>
+<body>
+    
+    
+    <p>Please enter your date of birth</p>
+    <input id="inputDate" type="date"> <button onclick="dateDiff()">Click to find the age of the user</button>
+    <p id="diffDisplay" style="display: none">User is <span id="diff"></span> years old</p>
+    
+    <h1 id="date"></h1>
+    <h2 id="time"></h2>
+
+    
+</body>
+</html>
