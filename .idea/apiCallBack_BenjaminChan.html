@@ -38,10 +38,13 @@
     <script type="text/javascript">
         function extractInfo(){
             var employeeInfo =[]
+            let pgNum = document.getElementById("pgNum").value
+            console.log(pgNum)
+            document.getElementById("error").innerHTML = ""
+            document.getElementById("response").innerHTML = ""
             let html =""
-            for(let i=1; i<=50; i++){
                  fetch(
-                "https://reqres.in/api/users?page=" +i,
+                "https://reqres.in/api/users?page=" +pgNum,
                 {method: 'GET'}
                 ).then(res=>res.json())
                 .then(res2=>{
@@ -57,6 +60,7 @@
                         } 
                     } else if(employeeInfo.length==0){
                         document.getElementById("error").innerHTML = "No Data Found"
+                        
                     }
                    
                 })
@@ -64,8 +68,6 @@
                     console.log("No data found"),
                     document.getElementById("response").innerHTML = err;
                 })
-            }
-              
         }
         function inputInfo(){
             
@@ -115,7 +117,11 @@
     <br>
     <br>
     <div>
-        <button onclick="extractInfo()">Click to list all Personnel</button>
+        <select onchange="extractInfo()" id="pgNum" placeholder="Select Page">
+            <option>Choose a page</option>
+            <option value="1">Page 1</option>
+            <option value="2">Page 2</option>
+            <option value="3">Page 3</option>
     </div>
 </body>
 </html>
