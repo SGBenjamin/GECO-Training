@@ -1,0 +1,41 @@
+
+<head>
+
+    <script>
+            function storeLocal(){
+                let val = document.getElementById("token").value;
+                if(val!=""){
+                    localStorage.setItem("token", val);
+                } else localStorage.setItem("token", null);
+            }
+            function getLocal(){
+                console.log("Local Storage: "+localStorage.getItem("token"));
+            }
+            function sessionStore(){
+                let val = document.getElementById("WebID").value;
+                if(val!=""){
+                    sessionStorage.setItem("WebID", val);
+                } else sessionStorage.setItem("token", null)
+                
+            }
+            function getSession(){
+                console.log("Session Storage: "+sessionStorage.getItem("WebID"));
+            }
+    </script>
+</head>
+    <div>
+        <input style="margin-bottom: 5px" type="text" id="token" placeholder="Token Entry">
+        <br>
+        <button onclick="storeLocal()">Set Information into Local Storage</button>
+        <button onclick="getLocal()">Get Information from Local Storage into Console</button>
+    </div>
+    <br>
+    <div>
+        <input style="margin-bottom: 5px" type="text" id="WebID" placeholder="WebID Entry">
+        <br>
+        <button onclick="sessionStore()">Set Information into Session Storage</button>
+        <button onclick="getSession()">Get Information from Session Storage into Console</button>
+    </div>
+
+    
+</html>
