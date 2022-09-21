@@ -28,6 +28,30 @@
   color: #61dafb;
 }
 
+.menu li{
+  font-weight: bold;
+  display: inline-block;
+  margin: 0 20px;
+}
+
+li:hover{
+  background-color: red;
+}
+textarea{
+    width: 50%;
+    height: 300px;
+}
+
+.contactForm{
+  align-items: center;
+}
+.otherContact{
+  text-align: center;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
