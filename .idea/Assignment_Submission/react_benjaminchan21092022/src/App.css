@@ -60,3 +60,18 @@ textarea{
     transform: rotate(360deg);
   }
 }
+
+.emp-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2em;
+}
+
+.table_red{
+  background-color: red;
+}
+
+.table_grey{
+  background-color: grey;
+}

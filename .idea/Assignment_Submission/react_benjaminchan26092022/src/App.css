@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  color: Green;
 }
 
 .App-logo {
@@ -28,6 +29,30 @@
   color: #61dafb;
 }
 
+.menu li{
+  font-weight: bold;
+  display: inline-block;
+  margin: 0 20px;
+}
+
+li:hover{
+  background-color: red;
+}
+textarea{
+    width: 50%;
+    height: 300px;
+}
+
+.contactForm{
+  align-items: center;
+}
+.otherContact{
+  text-align: center;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -36,3 +61,21 @@
     transform: rotate(360deg);
   }
 }
+
+.table_red{
+  background-color: red;
+}
+table, td, th{
+  border: 1px solid;
+  width: 5%;
+  height: 5%;
+  text-align: center;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+.empDetailBox{
+  display: none;
+  
+}
+
+
