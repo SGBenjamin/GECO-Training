@@ -1,81 +1,34 @@
-.App {
+
+
+.menu{
+  position: relative;
   text-align: center;
-  color: Green;
+  width: 25%;
+  padding: 5px;
+  font-size: 50px;
+  font-family: 'Courier New', Courier, monospace;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-.menu li{
-  font-weight: bold;
+li{
   display: inline-block;
-  margin: 0 20px;
+  padding:10px;
 }
 
-li:hover{
-  background-color: red;
-}
-textarea{
-    width: 50%;
-    height: 300px;
+.current{
+  text-decoration-color: red;
+  background-color: gold;
+  font-weight:bolder;
 }
 
-.contactForm{
-  align-items: center;
-}
-.otherContact{
-  text-align: center;
-  font-weight: bold;
-  text-decoration: underline;
+.nav-link {
+  color: green;
 }
 
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.nav-item>a:hover {
+  color: green;
 }
 
-.table_red{
-  background-color: red;
+/*code to change background color*/
+.navbar-nav>.active>a {
+  background-color: #C0C0C0;
+  color: green;
 }
-table, td, th{
-  border: 1px solid;
-  width: 5%;
-  height: 5%;
-  text-align: center;
-  border-collapse: collapse;
-  table-layout: auto;
-}
-.empDetailBox{
-  display: none;
-  
-}
-
-

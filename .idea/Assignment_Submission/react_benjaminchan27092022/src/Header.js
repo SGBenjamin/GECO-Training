@@ -1,10 +1,28 @@
 import './App.css';
-function Header(){
+import { useEffect,useState } from 'react';
+function Header(prop){
+    console.log(window.location.pathname)
+    
+    const[isExist, setIsExist] = useState(false);
+    useEffect(()=>{
+        if(localStorage.getItem("username")!= null && localStorage.getItem("password")!=""){
+            setIsExist(true);
+        }else{
+            setIsExist(false);
+        }
+    },[localStorage.getItem("username")])
+
     return(
-        <ul className='menu' align="center">
-            <li><a href='getapi'>GetAPI</a></li>
-            <li><a href='postapi'>PostAPI</a></li>
-        </ul>
+        <div align="center">
+            <ul className='menu'>
+                <li className={window.location.pathname == "/getapi"?"current":''}><a href='getapi'>GetAPI</a></li>
+                <li className={window.location.pathname == "/postapi"?"current":''}><a href='postapi'>PostAPI</a></li>
+                {isExist?<li><a href="#">Logout</a></li>: null}
+            </ul>
+
+        </div>
+        
+        
     )
 }
 

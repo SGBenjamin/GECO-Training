@@ -15,8 +15,8 @@ function App() {
         <Header/>
         <Router>
           <Routes>
-            <Route path ='/GetAPI' element={<GetAPI />}/>
-            <Route path='/PostAPI' element={<PostAPI />}/>            
+            <Route path ='/getapi' element={<GetAPI />}/>
+            <Route path='/postapi' element={<PostAPI />}/>            
           </Routes>
         </Router>
         <Footer/>
