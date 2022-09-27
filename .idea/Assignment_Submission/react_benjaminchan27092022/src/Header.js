@@ -1,7 +1,6 @@
 import './App.css';
 import { useEffect,useState } from 'react';
 function Header(prop){
-    console.log(window.location.pathname)
     
     const[isExist, setIsExist] = useState(false);
     useEffect(()=>{
@@ -17,7 +16,7 @@ function Header(prop){
             <ul className='menu'>
                 <li className={window.location.pathname == "/getapi"?"current":''}><a href='getapi'>GetAPI</a></li>
                 <li className={window.location.pathname == "/postapi"?"current":''}><a href='postapi'>PostAPI</a></li>
-                {isExist?<li><a href="#">Logout</a></li>: null}
+                {isExist?<li><a href="/">Logout</a></li>: null}
             </ul>
 
         </div>
