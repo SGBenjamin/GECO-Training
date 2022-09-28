@@ -337,6 +337,7 @@ a:focus {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   -webkit-box-pack: justify;
@@ -345,14 +346,16 @@ a:focus {
   -webkit-box-align: stretch;
       -ms-flex-align: stretch;
           align-items: stretch;
+
 }
 
 .gallery-section .container h2 {
   color: #ffffff;
+  
 }
 
 .gallery-section .img_box {
-  margin: 15px 0;
+  margin: 50px 0;
 }
 
 .gallery-section .img_box img {

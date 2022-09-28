@@ -2,7 +2,11 @@ import logo from './logo.svg';
 import './App.css';
 import {BrowserRouter as Router,Routes,Route} from "react-router-dom";
 import Home from './Home';
-
+import Contact from './Contact';
+import Buy from './Buy';
+import Service from './Service';
+import Pet from './Pet';
+import Clinic from './Clinic';
 
 function App() {
   return (
@@ -10,8 +14,12 @@ function App() {
       <Routes>
           <Route path="/home" element={<Home/>}/> 
           <Route path="/" element={<Home/>}/>
-          {/* <Route path="/about" element={<About/>}/> */}
-          {/* <Route path="/contact" element={<Contact/>}/> */}
+          <Route path="/service" element={<Service/>}/>
+          <Route path="/pet" element={<Pet/>}/>
+          <Route path="/clinic" element={<Clinic/>}/>
+          <Route path="/contact" element={<Contact/>}/>
+          <Route path="/buy" element={<Buy/>}/>
+
           
       </Routes>
    </Router>

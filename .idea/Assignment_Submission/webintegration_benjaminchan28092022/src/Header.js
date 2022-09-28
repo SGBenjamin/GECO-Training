@@ -1,16 +1,17 @@
 import './App.css';
 import { useEffect,useState } from 'react';
+import { NavLink } from 'react-router-dom';
 function Header(prop){
     return(
         <header className="header_section">
         <div className="container-fluid">
             <nav className="navbar navbar-expand-lg custom_nav-container ">
-            <a className="navbar-brand" href="index.html">
+            <NavLink to="/home">
                 <img src="images/logo.png" alt=""/>
                 <span>
                 Petology
                 </span>
-            </a>
+            </NavLink>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
@@ -20,22 +21,22 @@ function Header(prop){
                 <div className="d-flex mx-auto flex-column flex-lg-row align-items-center">
                 <ul className="navbar-nav  ">
                     <li className="nav-item active">
-                    <a className="nav-link" href="index.html">Home <span className="sr-only">(current)</span></a>
+                    <NavLink className="nav-link" to="/home">Home <span className="sr-only">(current)</span></NavLink>
                     </li>
                     <li className="nav-item">
-                    <a className="nav-link" href="service.html">service </a>
+                    <NavLink className="nav-link" to="/service">Service </NavLink>
                     </li>
                     <li className="nav-item">
-                    <a className="nav-link" href="pet.html">Pet's gallery </a>
+                    <NavLink className="nav-link" to="/pet">Pet's gallery </NavLink>
                     </li>
                     <li className="nav-item">
-                    <a className="nav-link" href="clinic.html"> clinic</a>
+                    <NavLink className="nav-link" to="/clinic"> Clinic</NavLink>
                     </li>
                     <li className="nav-item">
-                    <a className="nav-link" href="contact.html">Contact us</a>
+                    <NavLink className="nav-link" to="/contact">Contact us</NavLink>
                     </li>
                     <li className="nav-item">
-                    <a className="nav-link" href="buy.html"> Buy now </a>
+                    <NavLink className="nav-link" to="/buy"> Buy now </NavLink>
                     </li>
                 </ul>
                 <form className="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
@@ -43,9 +44,9 @@ function Header(prop){
                 </form>
                 </div>
                 <div className="quote_btn-container  d-flex justify-content-center">
-                <a href="">
+                <NavLink to="/home">
                     Call: +01 1234567890
-                </a>
+                </NavLink>
                 </div>
             </div>
             </nav>
