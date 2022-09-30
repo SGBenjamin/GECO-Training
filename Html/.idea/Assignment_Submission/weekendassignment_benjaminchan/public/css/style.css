@@ -307,20 +307,20 @@ img {
 	padding: 0;
 	width: 80px;
 }
-#bottom_link div.footer div ul li a.product {
+#body.home div.footer div ul li a.product {
 	background-position: 0 -372px;
 }
-#bottom_link div.footer div ul li a.about {
+#body.home div.footer div ul li a.about {
 	background-position: 0 -418px;
 }
-#bottom_link div.footer div ul li a.flavor {
+#body.home div.footer div ul li a.flavor {
 	background-position: 0 -280px;
 }
-#bottom_link div.footer div ul li a.contact {
+#body.home div.footer div ul li a.contact {
 	float: none;
 	background-position: 0 -326px;
 }
-#bottom_link div.footer div ul li h1 {
+#body.home div.footer div ul li h1 {
 	color: #ffffff;
 	font-family: lato-regular-webfont;
 	font-size: 20px;

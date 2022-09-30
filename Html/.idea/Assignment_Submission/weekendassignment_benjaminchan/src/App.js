@@ -7,6 +7,7 @@ import Blog from './Blog';
 import About from './About';
 import Singlepost from './Singlepost';
 import Products from './Products';
+import React from 'react';
 
 
 export default function App() {
