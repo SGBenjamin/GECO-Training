@@ -18,9 +18,24 @@ public class ArrayListProductPojo {
         productArrayList.add(product4);
         productArrayList.add(product5);
 
-        System.out.println("After Sorting:" + productArrayList.toString());
+        System.out.println("Before Sorting:" + productArrayList.toString());
+        for(Product prd : productArrayList){
+            System.out.println(prd);
+            System.out.println(prd.getName());
+            System.out.println(prd.getDescription());
+            System.out.println(prd.getPrice());
+
+        };
+
+
         productArrayList.sort(Comparator.comparing(Product::getPrice));
         System.out.println("After Sorting" + productArrayList.toString());
+        for(Product prd : productArrayList){
+            System.out.println(prd);
+            System.out.println(prd.getName());
+            System.out.println(prd.getDescription());
+            System.out.println(prd.getPrice());
+        };
 
 
 
