@@ -34,7 +34,7 @@ public class Main {
         userHash.put(5,user5);
         userHash.put(6,user6);
         userHash.put(7,user7);
-        userHash.put(8, user8);
+        userHash.put(8,user8);
 
         System.out.println("--------------------------------------------");
         System.out.println("Before Filtering/Limiting");
@@ -51,7 +51,7 @@ public class Main {
         System.out.println(filteredUserHash);
         System.out.println("Map Size: "+ filteredUserHash.size());
 
-        Map.Entry<Integer, User> firstAName = userHash.entrySet()
+        Map.Entry<Integer, User> firstNameAV1 = userHash.entrySet()
                 .stream()
                 .filter(x->x.getValue().name.startsWith("A"))
                 .findFirst()
@@ -60,20 +60,20 @@ public class Main {
 //                .collect(Collectors.toMap(x->x.getKey(), x-> x.getValue()));
         System.out.println("--------------------------------------------");
         System.out.println("After Name Filtering and Limit ver 1");
-        System.out.println(firstAName);
+        System.out.println(firstNameAV1);
 
 
 
-        Map<Integer, User> firstNameA = userHash.entrySet()
+        Map<Integer, User> firstNameAV2 = userHash.entrySet()
                 .stream()
                 .filter(x->x.getValue().name.startsWith("A"))
 //                .findFirst()
 //                .orElse(null);
                 .limit(1)
-                .collect(Collectors.toMap(x->x.getKey(), x-> x.getValue()));
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
         System.out.println("--------------------------------------------");
         System.out.println("After Name Filtering and Limit ver 2");
-        System.out.println(firstNameA);
+        System.out.println(firstNameAV2);
 
 
 
