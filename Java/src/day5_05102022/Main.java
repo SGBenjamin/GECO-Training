@@ -3,7 +3,6 @@ package day5_05102022;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -12,6 +11,8 @@ public class Main {
     public static void main(String[] args) {
         ArrayList<User> userArray = new ArrayList<User>();
 
+
+
         User user1 = new User("Adam", 25, "Choa Chu Kang");
         User user2 = new User("Charlie", 18, "Bukit Panjang");
         User user3 = new User("Ester", 13, "Jurong East");
@@ -19,6 +20,10 @@ public class Main {
         User user5 = new User("Bob", 19, "Clementi");
         User user6 = new User("Alice", 29, "Queensway");
         User user7 = new User("Aaron", 30, "Hougang");
+        User user8 = new User();
+        user8.setName("George");
+        user8.setAge(17);
+        user8.setAddress("Pasir Ris");
 
         HashMap<Integer, User> userHash = new HashMap<>();
 
@@ -29,6 +34,7 @@ public class Main {
         userHash.put(5,user5);
         userHash.put(6,user6);
         userHash.put(7,user7);
+        userHash.put(8, user8);
 
         System.out.println("--------------------------------------------");
         System.out.println("Before Filtering/Limiting");
@@ -55,6 +61,7 @@ public class Main {
         System.out.println("--------------------------------------------");
         System.out.println("After Name Filtering and Limit ver 1");
         System.out.println(firstAName);
+
 
 
         Map<Integer, User> firstNameA = userHash.entrySet()
