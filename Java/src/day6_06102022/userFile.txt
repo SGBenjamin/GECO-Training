@@ -1,0 +1,50 @@
+Username: Adam
+Age: 25
+Address: Choa Chu Kang
+Time: 2022-10-06T13:52:15.3910395
+-----------------------
+Username: Charlie
+Age: 18
+Address: Bukit Panjang
+Time: 2022-10-06T13:52:16.4030984
+-----------------------
+Username: Ester
+Age: 13
+Address: Jurong East
+Time: 2022-10-06T13:52:17.4156353
+-----------------------
+Username: Dave
+Age: 65
+Address: Boon Lay
+Time: 2022-10-06T13:52:18.429088
+-----------------------
+Username: Bob
+Age: 19
+Address: Clementi
+Time: 2022-10-06T13:52:19.4421122
+-----------------------
+Username: Alice
+Age: 29
+Address: Queensway
+Time: 2022-10-06T13:52:20.4532437
+-----------------------
+Username: Aaron
+Age: 30
+Address: Hougang
+Time: 2022-10-06T13:52:21.4672925
+-----------------------
+Username: George
+Age: 35
+Address: Senkang
+Time: 2022-10-06T13:52:22.4781458
+-----------------------
+Username: Henry
+Age: 45
+Address: Pasir Ris
+Time: 2022-10-06T13:52:23.4860848
+-----------------------
+Username: Issac
+Age: 35
+Address: Tuas
+Time: 2022-10-06T13:52:24.4932927
+-----------------------
