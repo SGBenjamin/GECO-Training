@@ -54,7 +54,7 @@ public class UserController {
     }
 
     @GetMapping("user")
-    public ResponseEntity<?> getUsers(){
+    public ArrayList<UserModel> getUsers(){
         UserResponse response = new UserResponse();
         ArrayList<UserModel> userModelArrayList = new ArrayList<UserModel>();
         UserModel userModel1 = new UserModel("user1@gmail.com", "user1","CCK");
@@ -68,17 +68,13 @@ public class UserController {
         userModelArrayList.add(userModel4);
 
         if(userModelArrayList.size()!=0){
-            response.setMessage(userModelArrayList.toString());
-            return ResponseEntity.ok(response);
+            return userModelArrayList;
 
         }else{
-            response.setMessage("Unable to access User ArrayList");
-            return ResponseEntity.badRequest().body(response);
+            return null;
         }
 
     }
-
-
 
     @PostMapping("math")
     public ResponseEntity<?> mathematics(@RequestBody MathRequest mathRequest){
