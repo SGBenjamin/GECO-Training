@@ -30,7 +30,7 @@ public class UserController {
         userModelArrayList.add(userModel3);
         userModelArrayList.add(userModel4);
 
-        GeneralResponse response = new GeneralResponse();
+        UserResponse response = new UserResponse();
         if(userRequest.getPassword().equals(userModelArrayList.get(0).getPassword()) &&
         userRequest.getEmail().equals(userModelArrayList.get(0).getEmail())){
             response.setMessage("Login Successful");
