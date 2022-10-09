@@ -84,7 +84,6 @@ public class UserController {
 
         if(userModelArrayList.size()!=0){
             return userModelArrayList;
-
         }else{
             return null;
         }
