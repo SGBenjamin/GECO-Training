@@ -31,26 +31,41 @@ public class UserController {
         userModelArrayList.add(userModel4);
 
         UserResponse response = new UserResponse();
-        if(userRequest.getPassword().equals(userModelArrayList.get(0).getPassword()) &&
-        userRequest.getEmail().equals(userModelArrayList.get(0).getEmail())){
-            response.setMessage("Login Successful");
-            return ResponseEntity.ok(response);
-        }else if(userRequest.getPassword().equals(userModelArrayList.get(1).getPassword()) &&
-                userRequest.getEmail().equals(userModelArrayList.get(1).getEmail())){
-            response.setMessage("Login Successful");
-            return ResponseEntity.ok(response);
-        }else if(userRequest.getPassword().equals(userModelArrayList.get(2).getPassword()) &&
-                userRequest.getEmail().equals(userModelArrayList.get(2).getEmail())){
-            response.setMessage("Login Successful");
-            return ResponseEntity.ok(response);
-        }else if(userRequest.getPassword().equals(userModelArrayList.get(3).getPassword()) &&
-                userRequest.getEmail().equals(userModelArrayList.get(3).getEmail())){
+        boolean responseBool = false;
+        for(UserModel user : userModelArrayList){
+            if(userRequest.getEmail().equalsIgnoreCase(user.getEmail()) &&
+                    userRequest.getPassword().equals(user.getPassword())){
+                responseBool = true;
+                break;
+            }else responseBool = false;
+        }
+        if(responseBool){
             response.setMessage("Login Successful");
             return ResponseEntity.ok(response);
         } else{
             response.setMessage("Login Credentials not Valid. Please Try again.");
             return ResponseEntity.badRequest().body(response);
         }
+//        if(userRequest.getPassword().equals(userModelArrayList.get(0).getPassword()) &&
+//        userRequest.getEmail().equals(userModelArrayList.get(0).getEmail())){
+//            response.setMessage("Login Successful");
+//            return ResponseEntity.ok(response);
+//        }else if(userRequest.getPassword().equals(userModelArrayList.get(1).getPassword()) &&
+//                userRequest.getEmail().equals(userModelArrayList.get(1).getEmail())){
+//            response.setMessage("Login Successful");
+//            return ResponseEntity.ok(response);
+//        }else if(userRequest.getPassword().equals(userModelArrayList.get(2).getPassword()) &&
+//                userRequest.getEmail().equals(userModelArrayList.get(2).getEmail())){
+//            response.setMessage("Login Successful");
+//            return ResponseEntity.ok(response);
+//        }else if(userRequest.getPassword().equals(userModelArrayList.get(3).getPassword()) &&
+//                userRequest.getEmail().equals(userModelArrayList.get(3).getEmail())){
+//            response.setMessage("Login Successful");
+//            return ResponseEntity.ok(response);
+//        } else{
+//            response.setMessage("Login Credentials not Valid. Please Try again.");
+//            return ResponseEntity.badRequest().body(response);
+//        }
     }
 
     @GetMapping("user")
