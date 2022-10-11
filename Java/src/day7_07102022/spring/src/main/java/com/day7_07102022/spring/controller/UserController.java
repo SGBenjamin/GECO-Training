@@ -5,6 +5,8 @@ import com.day7_07102022.spring.Request.UserRequest;
 import com.day7_07102022.spring.model.UserModel;
 import com.day7_07102022.spring.response.GeneralResponse;
 import com.day7_07102022.spring.response.UserResponse;
+import com.day7_07102022.spring.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +18,8 @@ import java.util.ArrayList;
 
 @RestController
 public class UserController {
+    @Autowired
+    UserService userService;
 
     @PostMapping("userLogin")
     public ResponseEntity<?> login(@RequestBody UserRequest userRequest){
@@ -37,7 +41,7 @@ public class UserController {
                     userRequest.getPassword().equals(user.getPassword())){
                 responseBool = true;
                 break;
-            }else responseBool = false;
+            }
         }
         if(responseBool){
             response.setMessage("Login Successful");
@@ -88,6 +92,15 @@ public class UserController {
             return null;
         }
 
+    }
+
+    @PostMapping("add")
+    public ResponseEntity<?> addition(@RequestBody MathRequest mathRequest){
+        GeneralResponse response = new GeneralResponse();
+        int result = userService.addition(mathRequest.getNum1(), mathRequest.getNum2());
+        response.setMessage("Result is "+result);
+        response.setSum(result);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("math")

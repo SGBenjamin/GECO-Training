@@ -1,4 +1,4 @@
-package com.day7_07102022.spring.response;
+package com.springday8.spring.response;
 
 import lombok.*;
 

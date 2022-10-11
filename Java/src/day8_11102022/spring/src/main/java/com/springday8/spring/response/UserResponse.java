@@ -1,4 +1,4 @@
-package com.day7_07102022.spring.response;
+package com.springday8.spring.response;
 
 import lombok.*;
 
@@ -7,8 +7,9 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class UserResponse {
 
-    String message;
+public class UserResponse {
+    int id;
+    String  username, address, email, message;
 
 }

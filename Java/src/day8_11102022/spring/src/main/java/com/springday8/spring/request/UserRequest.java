@@ -1,4 +1,4 @@
-package com.day7_07102022.spring.Request;
+package com.springday8.spring.request;
 
 
 import lombok.*;
@@ -11,4 +11,5 @@ import lombok.*;
 public class UserRequest {
     String email;
     String password;
+
 }
