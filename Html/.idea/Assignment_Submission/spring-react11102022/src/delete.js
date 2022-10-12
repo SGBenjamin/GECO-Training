@@ -21,7 +21,7 @@ export default function Delete(){
         
         return(
                 <div align='center'>
-                        <select name = "userid" onSubmit={(e)=>setUserId(e.target.value)}>
+                        <select name = "userid" onChange={(e)=>setUserId(e.target.value)}>
                             <option defaultValue={""}hidden></option>
                             <option value="1"> User 1</option>
                             <option value="2"> User 2</option>

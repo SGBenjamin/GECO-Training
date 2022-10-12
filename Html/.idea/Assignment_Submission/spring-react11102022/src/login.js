@@ -24,19 +24,15 @@ export default function Login(){
                 ).then(res=>res.json())
                 .then(res=>{
                     console.log(res);
-                    setEmail(res['email']);
-                    setPassword(res['password']);
-                    setMessage(res['message']);
                 })
 
         }
         
         return(
                 <div align='center'>
-                        <input type="text" name = "email" onChange={(e)=> setEmail(e.target.value)} placeholder="Enter the email" />
+                        <input type="text" className = "email" onChange={(e)=> setEmail(e.target.value)} placeholder="Enter the email" />                        <br></br>
                         <br></br>
-                        <br></br>
-                        <input type="text" name = "password" onChange={(e)=> setPassword(e.target.value)} placeholder="Enter the password"/>
+                        <input type="text" className = "password" onChange={(e)=> setPassword(e.target.value)} placeholder="Enter the password"/>
                         <br></br>
                         <br></br>
                         <button type="submit" onClick={loginAPI}>Submit to Spring</button>
