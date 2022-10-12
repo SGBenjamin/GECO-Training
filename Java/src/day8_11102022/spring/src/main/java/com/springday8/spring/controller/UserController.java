@@ -52,7 +52,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/delete/{userid}")
+    @DeleteMapping("/delete/{userid}")
     public ResponseEntity<?> deleteUser(@PathVariable Integer userid){
         UserResponse userResponse = new UserResponse();
         try{
