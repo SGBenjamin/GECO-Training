@@ -1,65 +1,61 @@
 package com.springday8.spring.services;
 
 import com.springday8.spring.model.UserModel;
-import com.springday8.spring.response.UserResponse;
-import org.apache.catalina.User;
-import org.springframework.http.ResponseEntity;
+import com.springday8.spring.repo.UserRepo;
+import com.springday8.spring.request.UserRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class UserService {
 
-    public HashMap<Integer, UserModel> populateHash(){
-        HashMap<Integer, UserModel> userHash = new HashMap<>();
+    @Autowired
+    UserRepo userRepo;
 
-        UserModel userModel1 = new UserModel(1,"user1","CCK","user1@gmail.com","pw1");
-        UserModel userModel2 = new UserModel(2, "user2", "JE","user2@hotmail.com", "pw2");
-        UserModel userModel3 = new UserModel(3, "user3", "AMK","user3@yahoo.com","pw3");
-        UserModel userModel4 = new UserModel(4, "user4", "Clementi","user4@outlook.com","pw4");
-
-        userHash.put(1, userModel1);
-        userHash.put(2, userModel2);
-        userHash.put(3, userModel3);
-        userHash.put(4, userModel4);
-
-        return userHash;
-    }
-
-    public ResponseEntity<?> extractUser(int a){
-        HashMap<Integer, UserModel> userHash = populateHash();
-        UserResponse userResponse = new UserResponse();
-        if(a>userHash.size()){
-            userResponse.setMessage("User not Found");
-            return ResponseEntity.badRequest().body(userResponse);
+    public UserModel extractUser(Integer a) throws Exception {
+        Optional<UserModel> user = userRepo.findById(a);
+        if(user.isPresent()){
+            return user.get();
         }else{
-            UserModel user = userHash.get(a);
-            userResponse.setId(user.getId());
-            userResponse.setUsername(user.getUsername());
-            userResponse.setAddress(user.getAddress());
-            userResponse.setEmail(user.getEmail());
-            return ResponseEntity.ok(userResponse);
+            throw  new Exception("User not found");
         }
     }
 
-    public boolean loginValidation(String email, String password){
-        HashMap<Integer, UserModel> userHash = populateHash();
-        ArrayList<UserModel> userList = new ArrayList<>();
-        for(Integer id : userHash.keySet()){
-            userList.add(userHash.get(id));
+    public void createUser(UserRequest userRequest) throws Exception{
+        Optional<UserModel> existUser = userRepo.findUserByEmail(userRequest.getEmail());
+        if(existUser.isPresent()){
+            throw new Exception("Email is already in use");
+        }else{
+            UserModel newUser = new UserModel();
+            newUser.setUsername(userRequest.getUsername());
+            newUser.setPassword(userRequest.getPassword());
+            newUser.setAddress(userRequest.getAddress());
+            newUser.setEmail(userRequest.getEmail());
+            newUser.setMobileNum(userRequest.getMobileNum());
+            userRepo.save(newUser);
         }
-        boolean userValid = false;
-        for(UserModel user : userList){
-            if(email.equals(user.getEmail()) && password.equals(user.getPassword())){
-                userValid = true;
-                break;
-            }
+    }
+
+    public boolean deleteUser(Integer userid) throws Exception {
+        Optional<UserModel> user = userRepo.findById(userid);
+        if(user.isPresent()){
+            userRepo.deleteById(userid);
+            return true;
+        }else {
+            throw new Exception("User not Found");
         }
-        return userValid;
     }
 
 
+
+    public boolean loginValid(UserRequest userRequest) throws Exception {
+        Optional<UserModel> user = userRepo.findUserByEmailAndPassword(userRequest.getEmail(), userRequest.getPassword());
+        if(user.isPresent()){
+            return true;
+        }else {
+            throw new Exception("Login Invalid");
+        }
+    }
 }

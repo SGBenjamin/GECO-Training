@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name="users")
+@Table(name="usertest")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -14,32 +14,31 @@ import javax.persistence.*;
 @ToString
 public class UserModel {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-
     @Column(name="name")
-    @NonNull
     String username;
 
     @Column(name="address")
     String address;
 
     @Column(name="email")
-    @NonNull
     String email;
 
     @Column(name="password")
-    @NonNull
     String password;
 
-    public UserModel(int id, @NonNull String username, String address, @NonNull String email) {
+    @Column(name="mobile")
+    String mobileNum;
+
+    public UserModel(int id, String username, String address, String email) {
         this.id = id;
         this.username = username;
         this.address = address;
         this.email = email;
     }
 
-    public UserModel(@NonNull String email, @NonNull String password) {
+    public UserModel(String email, String password) {
         this.email = email;
         this.password = password;
     }

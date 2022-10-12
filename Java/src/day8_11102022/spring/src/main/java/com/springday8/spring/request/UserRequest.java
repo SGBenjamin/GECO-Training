@@ -9,7 +9,11 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 public class UserRequest {
+    int id;
+    String username;
+    String address;
     String email;
     String password;
+    String mobileNum;
 
 }
