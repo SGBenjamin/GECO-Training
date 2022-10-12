@@ -52,7 +52,7 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/delete/{userid}")
+    @PostMapping("/delete/{userid}")
     public ResponseEntity<?> deleteUser(@PathVariable Integer userid){
         UserResponse userResponse = new UserResponse();
         try{
@@ -66,24 +66,24 @@ public class UserController {
     }
 //    Update user still unable to be solved. Need help for this.
 //    Error given:  The given id must not be null!
-//    @PutMapping("/update/{userid}")
-//    public ResponseEntity<?> updateUser(@RequestBody UserRequest userRequest, Integer userid ){
-//        UserResponse userResponse = new UserResponse();
-//        Optional<Object> updatedUser = userRepo.findById(userid)
-//                .map(user->{
-//                    user.setId(userid);
-//                    user.setUsername(userRequest.getUsername());
-//                    user.setAddress(userRequest.getAddress());
-//                    user.setMobileNum(userRequest.getMobileNum());
-//                    user.setEmail(userRequest.getEmail());
-//                    user.setPassword(userRequest.getPassword());
-//                    return userRepo.save(user);
-//                });
-//
-//        userResponse.setMessage("User Update Successful");
-//        return ResponseEntity.ok(userResponse);
-//
-//    }
+    @PutMapping("/update/{userid}")
+    public ResponseEntity<?> updateUser(@RequestBody UserRequest userRequest, @PathVariable Integer userid ){
+        UserResponse userResponse = new UserResponse();
+        Optional<Object> updatedUser = userRepo.findById(userid)
+                .map(user->{
+                    user.setId(userid);
+                    user.setUsername(userRequest.getUsername());
+                    user.setAddress(userRequest.getAddress());
+                    user.setMobileNum(userRequest.getMobileNum());
+                    user.setEmail(userRequest.getEmail());
+                    user.setPassword(userRequest.getPassword());
+                    return userRepo.save(user);
+                });
+
+        userResponse.setMessage("User Update Successful");
+        return ResponseEntity.ok(userResponse);
+
+    }
 
     @PostMapping("/login")
     public ResponseEntity<?> loginValid(@RequestBody UserRequest userRequest){
