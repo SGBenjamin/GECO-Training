@@ -50,10 +50,10 @@ public class UserService {
 
 
 
-    public boolean loginValid(UserRequest userRequest) throws Exception {
+    public Optional<UserModel> loginValid(UserRequest userRequest) throws Exception {
         Optional<UserModel> user = userRepo.findUserByEmailAndPassword(userRequest.getEmail(), userRequest.getPassword());
         if(user.isPresent()){
-            return true;
+            return user;
         }else {
             throw new Exception("Login Invalid");
         }

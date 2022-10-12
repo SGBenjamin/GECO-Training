@@ -89,9 +89,9 @@ public class UserController {
     public ResponseEntity<?> loginValid(@RequestBody UserRequest userRequest){
         UserResponse userResponse = new UserResponse();
         try{
-            userService.loginValid(userRequest);
-            userResponse.setMessage("Login Valid");
-            return ResponseEntity.ok(userResponse);
+            Optional<UserModel> user = userService.loginValid(userRequest);
+
+            return ResponseEntity.ok(user);
         } catch (Exception e) {
             userResponse.setMessage(e.getMessage());
             return ResponseEntity.badRequest().body(userResponse);
