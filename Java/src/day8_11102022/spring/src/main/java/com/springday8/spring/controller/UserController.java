@@ -79,19 +79,41 @@ public class UserController {
                     user.setPassword(userRequest.getPassword());
                     return userRepo.save(user);
                 });
-
         userResponse.setMessage("User Update Successful");
         return ResponseEntity.ok(userResponse);
-
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> loginValid(@RequestBody UserRequest userRequest){
         UserResponse userResponse = new UserResponse();
+        System.out.println(userRequest);
         try{
-            Optional<UserModel> user = userService.loginValid(userRequest);
-
+            UserModel user = userService.loginValid(userRequest.getEmail(), userRequest.getPassword());
             return ResponseEntity.ok(user);
+        } catch (Exception e) {
+            userResponse.setMessage(e.getMessage());
+            return ResponseEntity.badRequest().body(userResponse);
+        }
+    }
+
+    @PostMapping("/token")
+    public ResponseEntity<?> checkToken(@RequestHeader String token){
+        try{
+            return ResponseEntity.ok(token);
+        }catch (Exception e){
+            UserResponse userResponse = new UserResponse();
+            userResponse.setMessage(e.getMessage());
+            return ResponseEntity.badRequest().body(userResponse);
+        }
+    }
+
+    @PostMapping("/logout/{userid}")
+    public ResponseEntity<?> logout(@PathVariable Integer userid){
+        UserResponse userResponse = new UserResponse();
+        try{
+            userService.logout(userid);
+            userResponse.setMessage("Logout Successful");
+            return ResponseEntity.ok(userResponse);
         } catch (Exception e) {
             userResponse.setMessage(e.getMessage());
             return ResponseEntity.badRequest().body(userResponse);

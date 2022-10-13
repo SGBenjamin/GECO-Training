@@ -1,6 +1,7 @@
 package com.springday8.spring.model;
 
 import lombok.*;
+import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -25,11 +26,15 @@ public class UserModel {
     @Column(name="email")
     String email;
 
+    @JsonIgnore
     @Column(name="password")
     String password;
 
     @Column(name="mobile")
     String mobileNum;
+
+    @Column(name="token")
+    String token;
 
     public UserModel(int id, String username, String address, String email) {
         this.id = id;

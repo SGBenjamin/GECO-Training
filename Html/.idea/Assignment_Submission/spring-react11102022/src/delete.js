@@ -4,7 +4,7 @@ import React from 'react';
 export default function Delete(){
     const[message, setMessage]=useState("StandBy");
     const[userid, setUserId]=useState("");
-    const deleteAPI=(userid)=>{
+    const deleteAPI=()=>{
             fetch(
             "http://localhost:8080/user/delete/"+userid,
             {

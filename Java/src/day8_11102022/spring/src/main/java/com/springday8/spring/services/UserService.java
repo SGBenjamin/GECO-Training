@@ -6,7 +6,10 @@ import com.springday8.spring.request.UserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.Base64;
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 public class UserService {
@@ -48,14 +51,46 @@ public class UserService {
         }
     }
 
+    public UserModel loginValid(String email, String password) throws Exception {
+        UserModel user = userRepo.findUserByEmailAndPassword(email, password).orElseThrow(()->new Exception(("User not found")));
+        String token = createToken(user.getEmail());
+        updateToken(token, user.getId());
+        user.setToken(token);
+        return user;
+    }
 
+    public boolean logout(int id)throws Exception{
+        updateToken("", id);
+        return true;
+    }
 
-    public Optional<UserModel> loginValid(UserRequest userRequest) throws Exception {
-        Optional<UserModel> user = userRepo.findUserByEmailAndPassword(userRequest.getEmail(), userRequest.getPassword());
+    private void updateToken(String token, Integer id){
+        userRepo.updateTokenByUserId(token, id);
+    }
+
+    public String createToken(String email){
+        String encodedEmail = Base64.getEncoder().encode(email.getBytes()).toString();
+        LocalDateTime time = LocalDateTime.now();
+        Random rand = new Random(System.currentTimeMillis());
+        return rand.nextInt(50000)+encodedEmail+ rand.nextInt(35000);
+    }
+
+    public UserModel getUser(Integer id)throws Exception{
+        Optional<UserModel> user = userRepo.findById(id);
         if(user.isPresent()){
-            return user;
-        }else {
-            throw new Exception("Login Invalid");
+            return user.get();
+        }else{
+            throw new Exception("User not found");
         }
     }
+
+    public boolean tokenValid(String token, Integer id)throws Exception{
+        UserModel user = getUser(id);
+        if(user.getToken().equals(token)){
+            return true;
+        }else{
+            throw new Exception("Token Invalid");
+        }
+    }
+
 }
