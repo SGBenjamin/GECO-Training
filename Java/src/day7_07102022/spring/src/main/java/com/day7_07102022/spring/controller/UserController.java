@@ -97,7 +97,7 @@ public class UserController {
     @PostMapping("add")
     public ResponseEntity<?> addition(@RequestBody MathRequest mathRequest){
         GeneralResponse response = new GeneralResponse();
-        int result = userService.addition(mathRequest.getNum1(), mathRequest.getNum2());
+        int result = mathRequest.getNum1()+ mathRequest.getNum2();
         response.setMessage("Result is "+result);
         response.setSum(result);
         return ResponseEntity.ok(response);

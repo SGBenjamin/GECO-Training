@@ -3,19 +3,26 @@ package com.springday8.spring.controller;
 import com.springday8.spring.model.UserModel;
 import com.springday8.spring.repo.UserRepo;
 import com.springday8.spring.request.UserRequest;
-import com.springday8.spring.response.GeneralResponse;
 import com.springday8.spring.response.UserResponse;
 import com.springday8.spring.services.UserService;
-import org.apache.catalina.User;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.*;
+import javax.servlet.http.HttpServletRequest;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("user")
 public class UserController {
+    String fileUploadPath = "./src/main/resources/fileUpload/";
 
     @Autowired
     UserService userService;
@@ -86,7 +93,7 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> loginValid(@RequestBody UserRequest userRequest){
         UserResponse userResponse = new UserResponse();
-        System.out.println(userRequest);
+//        System.out.println(userRequest);
         try{
             UserModel user = userService.loginValid(userRequest.getEmail(), userRequest.getPassword());
             return ResponseEntity.ok(user);
@@ -119,5 +126,30 @@ public class UserController {
             return ResponseEntity.badRequest().body(userResponse);
         }
     }
+
+    @PostMapping(value = "imageupload")
+    public ResponseEntity<?> imageUpload(HttpServletRequest request, @RequestParam MultipartFile file) throws Exception{
+        UserResponse userResponse = new UserResponse();
+        String fileName = file.getOriginalFilename();
+        userResponse.setMessage("Image Uploaded Successfully to :"+fileUploadPath+fileName);
+        userResponse.setImage(fileName);
+        FileOutputStream fileOut = new FileOutputStream(fileUploadPath+fileName);
+        StringBuilder sb = new StringBuilder(fileUploadPath + fileName);
+        Integer id = Integer.valueOf(request.getHeader("id"));
+        userRepo.updateProfilePic(sb.toString(), id);
+        return ResponseEntity.ok(userResponse);
+    }
+
+    @GetMapping(
+            value = "viewimage/{filename}",
+            produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
+    )
+    public byte[] viewImage(@PathVariable String filename)throws Exception{
+//        FileInputStream inputStream = new FileInputStream(fileUploadPath+filename);
+        InputStream in = getClass().getResourceAsStream(fileUploadPath+filename);
+        assert in != null;
+        return IOUtils.toByteArray(in);
+    }
+
 
 }

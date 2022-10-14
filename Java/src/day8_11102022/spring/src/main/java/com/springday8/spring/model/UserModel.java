@@ -36,6 +36,9 @@ public class UserModel {
     @Column(name="token")
     String token;
 
+    @Column(name="profilepic")
+    String profilePic;
+
     public UserModel(int id, String username, String address, String email) {
         this.id = id;
         this.username = username;

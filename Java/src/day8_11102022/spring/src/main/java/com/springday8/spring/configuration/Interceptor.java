@@ -27,8 +27,8 @@ public class Interceptor implements HandlerInterceptor {
         String token = request.getHeader("token");
         String id = request.getHeader("id");
         Integer userId = Integer.parseInt(id);
-        System.out.println(id);
-        System.out.println(token);
+//        System.out.println(id);
+//        System.out.println(token);
 
         if(token.equals("")){
             throw new Exception("Token Not Found. Please send the token");
@@ -36,7 +36,7 @@ public class Interceptor implements HandlerInterceptor {
         if(id.equals("")){
             throw new Exception("UserId Not Found. Please send the UserId");
         }
-        System.out.println(id);
+//        System.out.println(id);
         if(userService.tokenValid(token,userId)){
             return true;
         }else{
