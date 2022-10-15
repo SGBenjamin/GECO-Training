@@ -159,9 +159,13 @@ public class UserController {
         UserModel user = userService.extractUser(userid);
         UserResponse userResponse = new UserResponse();
         try{
-            Files.delete(Path.of(fileUploadPath + user.getProfilePic()));
-            userRepo.updateProfilePic("", userid);
-            userResponse.setMessage("Files Deleted");
+            if(!user.getProfilePic().isBlank()){
+                Files.delete(Path.of(fileUploadPath + user.getProfilePic()));.
+                userRepo.updateProfilePic("", userid);
+                userResponse.setMessage("Files Deleted");
+            }else{
+                userResponse.setMessage("No image to be deleted");
+            }
             return ResponseEntity.ok(userResponse);
         }catch (Exception e){
             userResponse.setMessage("Could not find file");
