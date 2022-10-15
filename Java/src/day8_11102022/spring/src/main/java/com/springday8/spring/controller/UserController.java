@@ -160,7 +160,7 @@ public class UserController {
         UserResponse userResponse = new UserResponse();
         try{
             if(!user.getProfilePic().isBlank()){
-                Files.delete(Path.of(fileUploadPath + user.getProfilePic()));.
+                Files.delete(Path.of(fileUploadPath + user.getProfilePic()));
                 userRepo.updateProfilePic("", userid);
                 userResponse.setMessage("Files Deleted");
             }else{
