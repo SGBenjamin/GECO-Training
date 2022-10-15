@@ -3,7 +3,11 @@ package com.springday8.spring.services;
 import com.springday8.spring.model.UserModel;
 import com.springday8.spring.repo.UserRepo;
 import com.springday8.spring.request.UserRequest;
+import io.jsonwebtoken.Jwts;
+
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
@@ -15,9 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.util.Base64;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -26,6 +28,8 @@ public class UserService {
 
     @Autowired
     UserRepo userRepo;
+    @Autowired
+    Environment environment;
 
     public UserModel extractUser(Integer a) throws Exception {
         Optional<UserModel> user = userRepo.findById(a);
@@ -63,14 +67,14 @@ public class UserService {
 
     public UserModel loginValid(String email, String password) throws Exception {
         UserModel user = userRepo.findUserByEmailAndPassword(email, password).orElseThrow(()->new Exception(("User not found")));
-        String token = createToken(user.getEmail());
+        String token = createToken(user);
         updateToken(token, user.getId());
         user.setToken(token);
         return user;
     }
 
     public boolean logout(int id)throws Exception{
-        updateToken("", id);
+        updateToken(null, id);
         return true;
     }
 
@@ -78,11 +82,27 @@ public class UserService {
         userRepo.updateTokenByUserId(token, id);
     }
 
-    public String createToken(String email){
-        String encodedEmail = Base64.getEncoder().encode(email.getBytes()).toString();
-        LocalDateTime time = LocalDateTime.now();
-        Random rand = new Random(System.currentTimeMillis());
-        return rand.nextInt(50000)+encodedEmail+ rand.nextInt(35000);
+    public String createToken(UserModel user){
+//        String encodedEmail = Base64.getEncoder().encode(email.getBytes()).toString();
+//        LocalDateTime time = LocalDateTime.now();
+//        Random rand = new Random(System.currentTimeMillis());
+//        return rand.nextInt(50000)+encodedEmail+ rand.nextInt(35000);
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, 18);
+        String createdJWT = Jwts.builder()
+                .claim("email", user.getEmail())
+                .setSubject(user.getUsername())
+                .setId(""+user.getId())
+                .setIssuedAt(new Date())
+                .setExpiration(calendar.getTime())
+                .signWith(SignatureAlgorithm.HS512, environment.getProperty("JWTSecret"))
+                .compact();
+        return createdJWT;
+    }
+
+    public boolean verifyJWTToken (String token) throws Exception{
+        Jwts.parser().setSigningKey(environment.getProperty("JWTSecret")).parseClaimsJws(token);
+        return true;
     }
 
     public UserModel getUser(Integer id)throws Exception{

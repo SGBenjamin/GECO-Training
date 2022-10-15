@@ -161,7 +161,7 @@ public class UserController {
         try{
             if(!user.getProfilePic().isBlank()){
                 Files.delete(Path.of(fileUploadPath + user.getProfilePic()));
-                userRepo.updateProfilePic("", userid);
+                userRepo.updateProfilePic(null, userid);
                 userResponse.setMessage("Files Deleted");
             }else{
                 userResponse.setMessage("No image to be deleted");
