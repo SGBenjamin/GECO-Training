@@ -7,6 +7,8 @@ import com.springday8.spring.response.UserResponse;
 import com.springday8.spring.services.UserService;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -127,28 +131,42 @@ public class UserController {
         }
     }
 
-    @PostMapping(value = "imageupload")
-    public ResponseEntity<?> imageUpload(HttpServletRequest request, @RequestParam MultipartFile file) throws Exception{
+    @PostMapping("imageupload/{userid}")
+    public ResponseEntity<?> imageupload (@RequestParam("file") MultipartFile imagefile, @PathVariable Integer userid){
         UserResponse userResponse = new UserResponse();
-        String fileName = file.getOriginalFilename();
-        userResponse.setMessage("Image Uploaded Successfully to :"+fileUploadPath+fileName);
-        userResponse.setImage(fileName);
-        FileOutputStream fileOut = new FileOutputStream(fileUploadPath+fileName);
-        StringBuilder sb = new StringBuilder(fileUploadPath + fileName);
-        Integer id = Integer.valueOf(request.getHeader("id"));
-        userRepo.updateProfilePic(sb.toString(), id);
-        return ResponseEntity.ok(userResponse);
+        try{
+            userService.saveImage(imagefile);
+            userResponse.setMessage("File Upload Successfully");
+            userRepo.updateProfilePic(imagefile.getOriginalFilename(), userid);
+            userResponse.setImage(imagefile.getOriginalFilename());
+            return ResponseEntity.ok(userResponse);
+        }catch(Exception e){
+            userResponse.setMessage("Could not upload file: "+imagefile.getOriginalFilename());
+            return ResponseEntity.badRequest().body(userResponse);
+        }
     }
 
-    @GetMapping(
-            value = "viewimage/{filename}",
-            produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
-    )
-    public byte[] viewImage(@PathVariable String filename)throws Exception{
-//        FileInputStream inputStream = new FileInputStream(fileUploadPath+filename);
-        InputStream in = getClass().getResourceAsStream(fileUploadPath+filename);
-        assert in != null;
-        return IOUtils.toByteArray(in);
+    @GetMapping("/image/{userid}")
+    @ResponseBody
+    public ResponseEntity<?> getImage(@PathVariable Integer userid) throws Exception {
+        Resource file = userService.load(userid);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+    }
+
+    @GetMapping("/deleteimage/{userid}")
+    public ResponseEntity<?> deleteImage(@PathVariable Integer userid) throws Exception {
+        UserModel user = userService.extractUser(userid);
+        UserResponse userResponse = new UserResponse();
+        try{
+            Files.delete(Path.of(fileUploadPath + user.getProfilePic()));
+            userRepo.updateProfilePic("", userid);
+            userResponse.setMessage("Files Deleted");
+            return ResponseEntity.ok(userResponse);
+        }catch (Exception e){
+            userResponse.setMessage("Could not find file");
+            return ResponseEntity.badRequest().body(userResponse);
+        }
     }
 
 

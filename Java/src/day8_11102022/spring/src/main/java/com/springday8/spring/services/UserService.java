@@ -4,8 +4,16 @@ import com.springday8.spring.model.UserModel;
 import com.springday8.spring.repo.UserRepo;
 import com.springday8.spring.request.UserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.Base64;
 import java.util.Optional;
@@ -13,6 +21,8 @@ import java.util.Random;
 
 @Service
 public class UserService {
+
+    Path root = Paths.get("./src/main/resources/fileUpload/");
 
     @Autowired
     UserRepo userRepo;
@@ -92,5 +102,29 @@ public class UserService {
             throw new Exception("Token Invalid");
         }
     }
+
+    public void saveImage(MultipartFile file) throws IOException {
+        try{
+            Files.copy(file.getInputStream(),this.root.resolve(file.getOriginalFilename()));
+        }catch (Exception e){
+            throw new RuntimeException("Could not store file. Error: "+e.getMessage());
+        }
+    }
+    public Resource load(Integer userid) throws Exception {
+        UserModel user = extractUser(userid);
+        try {
+            Path file = root.resolve(user.getProfilePic());
+            Resource resource = new UrlResource(file.toUri());
+
+            if (resource.exists() || resource.isReadable()) {
+                return resource;
+            } else {
+                throw new RuntimeException("Could not read the file!");
+            }
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("Error: " + e.getMessage());
+        }
+    }
+
 
 }
