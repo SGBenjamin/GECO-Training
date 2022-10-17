@@ -25,6 +25,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("user")
+@CrossOrigin(origins="http://localhost:3001")
 public class UserController {
     String fileUploadPath = "./src/main/resources/fileUpload/";
 
@@ -94,7 +95,7 @@ public class UserController {
         return ResponseEntity.ok(userResponse);
     }
 
-    @CrossOrigin(origins="http://localhost:3006")
+
     @PostMapping("/login")
     public ResponseEntity<?> loginValid(@RequestBody UserRequest userRequest){
         UserResponse userResponse = new UserResponse();
@@ -121,7 +122,6 @@ public class UserController {
         }
     }
 
-    @CrossOrigin(origins="http://localhost:3006")
     @PostMapping("/logout/{userid}")
     public ResponseEntity<?> logout(@PathVariable Integer userid){
         UserResponse userResponse = new UserResponse();

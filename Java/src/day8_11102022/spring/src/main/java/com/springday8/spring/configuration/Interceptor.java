@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Enumeration;
 
 @Configuration
 public class Interceptor implements HandlerInterceptor {
@@ -20,9 +21,10 @@ public class Interceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
 
         try{
+            String token = request.getHeader("token");
+            String id = request.getHeader("id");
             String url = request.getRequestURL().toString();
-            System.out.println(request.toString());
-            System.out.println("Selected URL: "+url);
+
             if(request.getMethod().equals("OPTIONS")){
                 return true;
             }
@@ -30,8 +32,7 @@ public class Interceptor implements HandlerInterceptor {
                 System.out.println("Url Excluded due to Exception: "+url);
                 return true;
             }
-            String token = request.getHeader("token");
-            String id = request.getHeader("id");
+
             System.out.println("Token: "+token);
             System.out.println("Id: "+id);
             if(token== null||token.equals("")){
