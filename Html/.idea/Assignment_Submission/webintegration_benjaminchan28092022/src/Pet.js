@@ -1,6 +1,8 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import { useState } from "react";
+import React from 'react';
+
 
 export default function Pet(){
   const[petList, setPetList] = useState([

@@ -15,7 +15,9 @@ public class UserConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:3000")
                 .allowedHeaders("*")
-                .allowedMethods("*");
+                .allowedMethods("*")
+                .maxAge(3600);;
+
     }
 
     @Override

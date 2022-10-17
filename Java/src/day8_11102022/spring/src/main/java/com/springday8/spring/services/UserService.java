@@ -68,7 +68,9 @@ public class UserService {
     public UserModel loginValid(String email, String password) throws Exception {
         UserModel user = userRepo.findUserByEmailAndPassword(email, password).orElseThrow(()->new Exception(("User not found")));
         String token = createToken(user);
+
         updateToken(token, user.getId());
+        System.out.println("Login Token: "+token);
         user.setToken(token);
         return user;
     }
@@ -83,10 +85,6 @@ public class UserService {
     }
 
     public String createToken(UserModel user){
-//        String encodedEmail = Base64.getEncoder().encode(email.getBytes()).toString();
-//        LocalDateTime time = LocalDateTime.now();
-//        Random rand = new Random(System.currentTimeMillis());
-//        return rand.nextInt(50000)+encodedEmail+ rand.nextInt(35000);
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_YEAR, 18);
         String createdJWT = Jwts.builder()
@@ -97,6 +95,7 @@ public class UserService {
                 .setExpiration(calendar.getTime())
                 .signWith(SignatureAlgorithm.HS512, environment.getProperty("JWTSecret"))
                 .compact();
+        System.out.println("createdtoken:"+createdJWT);
         return createdJWT;
     }
 
@@ -104,7 +103,14 @@ public class UserService {
         Jwts.parser().setSigningKey(environment.getProperty("JWTSecret")).parseClaimsJws(token);
         return true;
     }
-
+    public boolean tokenValid(String token, Integer id)throws Exception{
+        UserModel user = getUser(id);
+        if(user.getToken().equals(token)){
+            return true;
+        }else{
+            throw new Exception("Token Invalid");
+        }
+    }
     public UserModel getUser(Integer id)throws Exception{
         Optional<UserModel> user = userRepo.findById(id);
         if(user.isPresent()){
@@ -114,14 +120,7 @@ public class UserService {
         }
     }
 
-    public boolean tokenValid(String token, Integer id)throws Exception{
-        UserModel user = getUser(id);
-        if(user.getToken().equals(token)){
-            return true;
-        }else{
-            throw new Exception("Token Invalid");
-        }
-    }
+
 
     public void saveImage(MultipartFile file) throws IOException {
         try{

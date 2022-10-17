@@ -1,5 +1,6 @@
 package com.springday8.spring.configuration;
 
+import com.springday8.spring.response.UserResponse;
 import com.springday8.spring.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +21,7 @@ public class Interceptor implements HandlerInterceptor {
 
         try{
             String url = request.getRequestURL().toString();
+            System.out.println(request.toString());
             System.out.println("Selected URL: "+url);
             if(request.getMethod().equals("OPTIONS")){
                 return true;
@@ -46,34 +48,8 @@ public class Interceptor implements HandlerInterceptor {
                 return true;
             }else return false;
         }catch (Exception e){
-            throw new Exception(e.getMessage());
+            throw new Exception("Token is invalid");
         }
-//        String url = request.getRequestURL().toString();
-////        System.out.println(url);
-//
-//        if(url.endsWith("/login")){
-////            System.out.println(url);
-//            return true;
-//        }
-//        String token = request.getHeader("token");
-//        String id = request.getHeader("id");
-//        Integer userId = Integer.parseInt(id);
-////        System.out.println(id);
-////        System.out.println(token);
-//
-//        if(token.equals("")){
-//            throw new Exception("Token Not Found. Please send the token");
-//        }
-//        if(id.equals("")){
-//            throw new Exception("UserId Not Found. Please send the UserId");
-//        }
-////        System.out.println(id);
-//        if(userService.tokenValid(token,userId)){
-//            return true;
-//        }else{
-//            return false;
-//        }
-
     }
 
     @Override

@@ -1,9 +1,27 @@
 import Header from "./Header";
 import Footer from "./Footer";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import React from 'react';
+import { useNavigate } from "react-router-dom";
+import { httpGetWithHeader, httpPostWithHeader } from "./HTTPFetch";
+
 
 function Home(){
-
+    const[userList,serUserList] = useState([]);
+   
+    let navigate = useNavigate(); 
+    const checkLoginToken=()=>{
+        let token = localStorage.getItem("JWToken");
+        if(token == undefined || token == ""){
+           return false;
+        }
+        return true;
+  }
+  useEffect(()=>{
+     if(!checkLoginToken()){
+        navigate("/login");
+     }
+     },[])
 
 
     return(

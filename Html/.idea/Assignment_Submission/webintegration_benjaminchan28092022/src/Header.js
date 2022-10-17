@@ -1,7 +1,54 @@
 import './App.css';
 import { useEffect,useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import React from 'react';
+import { useNavigate } from "react-router-dom";
+import { httpPostWithHeader } from './HTTPFetch';
+
+
 function Header(prop){
+    const[isLoggedIn,setIsLoggedIn] = useState(false);
+    let navigate = useNavigate(); 
+
+    const checkLoginToken=()=>{
+        let token = localStorage.getItem("JWToken");
+        if(token==undefined||token==""){
+            setIsLoggedIn(false);
+        }else{
+            setIsLoggedIn(true);
+        }
+    }
+    
+    const logout_api=()=>{
+        let userId = localStorage.getItem("userId");
+        let token = localStorage.getItem("JWToken");
+        let endpointurl = "logout/"+userId
+        httpPostWithHeader(endpointurl)
+              .then(res=>{
+                    if(!res.ok){
+                       throw res;
+                    }
+                     return res.json();
+                    }
+                 )
+                 .then(ress2=>{
+                    //clear the toekn and navigate to login page  after success logout
+                    localStorage.removeItem("JWToken");
+                    localStorage.removeItem("userId");
+                    localStorage.removeItem("full_response");
+                    navigate("/login");
+                    
+      
+               }).catch(e=>{
+      
+               e.json().then(er=>{
+                  console.log("Eror while fechging the records",er)
+                  alert("Eror while fechging the records");
+               });
+               
+            })
+         }
+    useEffect(checkLoginToken,[]);
     return(
         <header className="header_section">
         <div className="container-fluid">
@@ -38,6 +85,18 @@ function Header(prop){
                     <li className="nav-item">
                     <NavLink className="nav-link" to="/buy"> Buy now </NavLink>
                     </li>
+                    {isLoggedIn?<>
+                         <li className="nav-item">
+                            <NavLink onClick={logout_api} className="nav-link" to="#">Logout</NavLink>
+                         </li></>
+                    :null}
+                    {!isLoggedIn?<>
+                         <li className="nav-item">
+                            <NavLink className="nav-link" to="/login">Login</NavLink>
+                         </li>
+                        </>
+                    :null}
+                    
                 </ul>
                 <form className="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
                     <button className="btn  my-2 my-sm-0 nav_search-btn" type="submit"></button>

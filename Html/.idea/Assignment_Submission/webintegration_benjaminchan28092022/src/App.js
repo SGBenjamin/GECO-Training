@@ -7,6 +7,9 @@ import Buy from './Buy';
 import Service from './Service';
 import Pet from './Pet';
 import Clinic from './Clinic';
+import React from 'react';
+import Login from './login';
+
 
 function App() {
   return (
@@ -19,6 +22,7 @@ function App() {
           <Route path="/clinic" element={<Clinic/>}/>
           <Route path="/contact" element={<Contact/>}/>
           <Route path="/buy" element={<Buy/>}/>
+          <Route path="/login" element={<Login/>}/>
 
           
       </Routes>
