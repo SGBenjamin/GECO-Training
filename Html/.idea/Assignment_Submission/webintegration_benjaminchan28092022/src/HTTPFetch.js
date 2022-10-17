@@ -14,13 +14,13 @@ export  const httpPostWithHeader=(endpointurl,requestParam)=>{
 
 export  const httpGetWithHeader=(endpointurl)=>{
     let userId = localStorage.getItem("userId"); 
-    let token = localStorage.getItem("token"); 
+    let token = localStorage.getItem("JWToken"); 
     return fetch("http://localhost:8080/user/"+endpointurl,{
          method:"GET",
          headers:{
             "content-type":"application/json",
-            "token":token,
-            "userId":userId
+            "token":this.state.token,
+            "userId":this.state.userId
          }
       })
 

@@ -24,7 +24,9 @@ public class Interceptor implements HandlerInterceptor {
             String token = request.getHeader("token");
             String id = request.getHeader("id");
             String url = request.getRequestURL().toString();
-
+            System.out.println("URL: "+url);
+            System.out.println("Token: "+token);
+            System.out.println("Id: "+id);
             if(request.getMethod().equals("OPTIONS")){
                 return true;
             }
@@ -33,8 +35,7 @@ public class Interceptor implements HandlerInterceptor {
                 return true;
             }
 
-            System.out.println("Token: "+token);
-            System.out.println("Id: "+id);
+
             if(token== null||token.equals("")){
                 System.out.println("Token is null");
                 throw new Exception("Please send the Token");

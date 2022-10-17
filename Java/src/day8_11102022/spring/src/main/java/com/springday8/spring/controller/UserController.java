@@ -125,6 +125,7 @@ public class UserController {
     @PostMapping("/logout/{userid}")
     public ResponseEntity<?> logout(@PathVariable Integer userid){
         UserResponse userResponse = new UserResponse();
+        System.out.println("userid: "+userid);
         try{
             userService.logout(userid);
             userResponse.setMessage("Logout Successful");

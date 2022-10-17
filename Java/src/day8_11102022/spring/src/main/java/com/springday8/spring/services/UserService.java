@@ -76,6 +76,7 @@ public class UserService {
     }
 
     public boolean logout(int id)throws Exception{
+        System.out.println(id);
         updateToken(null, id);
         return true;
     }

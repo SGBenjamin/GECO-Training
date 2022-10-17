@@ -6,12 +6,15 @@ import { useNavigate } from "react-router-dom";
 import { httpPostWithHeader } from './HTTPFetch';
 
 
-function Header(prop){
+function Header(){
+    let userId = localStorage.getItem("userId");
+    let token = localStorage.getItem("JWToken");
+    console.log("userId: "+userId);
+    console.log("JWToken: "+token+". Localhost Token: "+localStorage.getItem("JWToken"));
     const[isLoggedIn,setIsLoggedIn] = useState(false);
     let navigate = useNavigate(); 
 
     const checkLoginToken=()=>{
-        let token = localStorage.getItem("JWToken");
         if(token==undefined||token==""){
             setIsLoggedIn(false);
         }else{
@@ -20,10 +23,8 @@ function Header(prop){
     }
     
     const logout_api=()=>{
-        let userId = localStorage.getItem("userId");
-        let token = localStorage.getItem("JWToken");
-        let endpointurl = "logout/"+userId
-        httpPostWithHeader(endpointurl)
+        
+        httpPostWithHeader("logout/"+userId)
               .then(res=>{
                     if(!res.ok){
                        throw res;
@@ -32,20 +33,15 @@ function Header(prop){
                     }
                  )
                  .then(ress2=>{
-                    //clear the toekn and navigate to login page  after success logout
                     localStorage.removeItem("JWToken");
                     localStorage.removeItem("userId");
                     localStorage.removeItem("full_response");
                     navigate("/login");
-                    
-      
                }).catch(e=>{
-      
-               e.json().then(er=>{
-                  console.log("Eror while fechging the records",er)
-                  alert("Eror while fechging the records");
+               e.json().then(error=>{
+                  console.log("Error while trying to logout",error)
+                  alert("Error while trying to logout");
                });
-               
             })
          }
     useEffect(checkLoginToken,[]);
