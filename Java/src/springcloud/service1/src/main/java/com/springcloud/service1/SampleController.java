@@ -18,6 +18,6 @@ public class SampleController {
         String response = restTemplate.getForObject("http://localhost:8082/sampleapi", String.class);
 
         System.out.println("Service1 Response is: "+response);
-        return response;
+        return ("Service1 Response is: "+response);
     }
 }
