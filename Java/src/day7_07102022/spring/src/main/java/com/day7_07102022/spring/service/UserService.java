@@ -13,15 +13,15 @@ public class UserService {
         return (a+b);
     }
 
-    public boolean createUser(){
-        try{
-            UserModel userModel = new UserModel();
-            userModel.setUsername("User 5");
-            userModel.setEmail("user5@gmail.com");
-            userModel.setPassword("user5pw");
-            userModel.setAddress("TPY");
-        }catch ()
-    }
+//    public boolean createUser(){
+//        try{
+//            UserModel userModel = new UserModel();
+//            userModel.setUsername("User 5");
+//            userModel.setEmail("user5@gmail.com");
+//            userModel.setPassword("user5pw");
+//            userModel.setAddress("TPY");
+//        }catch ()
+//    }
 
 
 }
