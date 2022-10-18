@@ -14,6 +14,7 @@ public class UserRequest {
     String email;
     String password;
     String mobileNum;
+    String token;
 
     public UserRequest(String email, String password) {
         this.email = email;

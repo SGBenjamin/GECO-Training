@@ -3,14 +3,12 @@ import { useEffect,useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import React from 'react';
 import { useNavigate } from "react-router-dom";
-import { httpPostWithHeader } from './HTTPFetch';
+import { httpLogoutWithHeader, httpPostWithHeader } from './HTTPFetch';
 
 
 function Header(){
     let userId = localStorage.getItem("userId");
     let token = localStorage.getItem("JWToken");
-    console.log("userId: "+userId);
-    console.log("JWToken: "+token+". Localhost Token: "+localStorage.getItem("JWToken"));
     const[isLoggedIn,setIsLoggedIn] = useState(false);
     let navigate = useNavigate(); 
 
@@ -23,8 +21,11 @@ function Header(){
     }
     
     const logout_api=()=>{
-        
-        httpPostWithHeader("logout/"+userId)
+        let params={
+            "userid":userId,
+            "JWToken": token
+        }
+        httpLogoutWithHeader(userId, params)
               .then(res=>{
                     if(!res.ok){
                        throw res;

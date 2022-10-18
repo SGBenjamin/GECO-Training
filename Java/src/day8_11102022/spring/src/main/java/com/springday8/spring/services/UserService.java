@@ -70,7 +70,6 @@ public class UserService {
         String token = createToken(user);
 
         updateToken(token, user.getId());
-        System.out.println("Login Token: "+token);
         user.setToken(token);
         return user;
     }

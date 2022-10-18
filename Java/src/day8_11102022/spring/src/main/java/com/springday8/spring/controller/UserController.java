@@ -100,8 +100,8 @@ public class UserController {
     public ResponseEntity<?> loginValid(@RequestBody UserRequest userRequest){
         UserResponse userResponse = new UserResponse();
 //        System.out.println(userRequest);
-        System.out.println(userRequest.getEmail());
-        System.out.println(userRequest.getPassword());
+//        System.out.println(userRequest.getEmail());
+//        System.out.println(userRequest.getPassword());
         try{
             UserModel user = userService.loginValid(userRequest.getEmail(), userRequest.getPassword());
             return ResponseEntity.ok(user);
@@ -123,9 +123,10 @@ public class UserController {
     }
 
     @PostMapping("/logout/{userid}")
-    public ResponseEntity<?> logout(@PathVariable Integer userid){
+    public ResponseEntity<?> logout(@PathVariable Integer userid, @RequestBody UserRequest userRequest){
         UserResponse userResponse = new UserResponse();
         System.out.println("userid: "+userid);
+        System.out.println("JWToken: "+userRequest.getToken());
         try{
             userService.logout(userid);
             userResponse.setMessage("Logout Successful");

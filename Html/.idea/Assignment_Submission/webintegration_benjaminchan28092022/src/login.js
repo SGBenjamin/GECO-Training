@@ -23,8 +23,6 @@ export default function Login(){
             "email": email,
             "password": password
             }
-            console.log(email);
-            console.log(password)
             httpPostWithoutHeader("login", params)
                 .then(res=>{
                     if(!res.ok){

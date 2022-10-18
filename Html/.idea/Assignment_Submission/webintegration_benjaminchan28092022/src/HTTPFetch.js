@@ -1,14 +1,27 @@
 export  const httpPostWithHeader=(endpointurl,requestParam)=>{
     let userId = localStorage.getItem("userId"); 
-    let token = localStorage.getItem("token"); 
+    let token = localStorage.getItem("JWToken");  
     return fetch("http://localhost:8080/user/"+endpointurl,{
          method:"POST",
          headers:{
             "content-type":"application/json",
-            "token":token,
+            "JWToken":token,
             "userId":userId
          },body:JSON.stringify(requestParam)
       },)
+
+}
+export  const httpLogoutWithHeader=(endpointurl, requestParam)=>{
+   let userId = localStorage.getItem("userId"); 
+   let token = localStorage.getItem("JWToken"); 
+   return fetch("http://localhost:8080/user/logout/"+endpointurl,{
+        method:"POST",
+        headers:{
+           "content-type":"application/json",
+           "JWToken":token,
+           "userId":userId
+        },body:JSON.stringify(requestParam)
+     },)
 
 }
 
@@ -19,8 +32,8 @@ export  const httpGetWithHeader=(endpointurl)=>{
          method:"GET",
          headers:{
             "content-type":"application/json",
-            "token":this.state.token,
-            "userId":this.state.userId
+            "JWToken":token,
+            "userId":userId
          }
       })
 

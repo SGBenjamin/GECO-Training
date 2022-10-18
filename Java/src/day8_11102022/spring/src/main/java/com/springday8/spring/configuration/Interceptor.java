@@ -10,6 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 public class Interceptor implements HandlerInterceptor {
@@ -21,12 +23,9 @@ public class Interceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
 
         try{
-            String token = request.getHeader("token");
-            String id = request.getHeader("id");
+            String token = request.getHeader("JWToken");
+            String id = request.getHeader("userId");
             String url = request.getRequestURL().toString();
-            System.out.println("URL: "+url);
-            System.out.println("Token: "+token);
-            System.out.println("Id: "+id);
             if(request.getMethod().equals("OPTIONS")){
                 return true;
             }
